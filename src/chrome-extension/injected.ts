@@ -4,6 +4,8 @@
 
 import { IRecursive } from './typing/common';
 
+console.log('running injected script...');
+
 type rebirth = {
   [key: string]: (...args: any[]) => void;
   stop: (fileName: string) => void
@@ -47,5 +49,7 @@ interface MyWindow extends Window {
     extraInfo: obj
   }, '*');
 };
-
-console.log('this is a log test');
+(window as MyWindow & typeof globalThis).rebirth.start();
+setTimeout(function() {
+  (window as MyWindow & typeof globalThis).rebirth.stop('testing file');
+}, 1000 * 60);
