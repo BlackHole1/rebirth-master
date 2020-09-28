@@ -1,5 +1,7 @@
 import { IWebPageMessages } from './typing/background';
 
+console.log('this is a log test in content script');
+
 if (typeof chrome.runtime.id !== 'undefined') {
   const port = chrome.runtime.connect(chrome.runtime.id);
 
@@ -15,6 +17,7 @@ if (typeof chrome.runtime.id !== 'undefined') {
     }
 
     if (msg.type === 'ready') {
+      console.log('this is a log test, ready to load injected script');
       // When the plug-in is ready, load JavaScript.
       const injectedScript = document.createElement('script');
       injectedScript.src = chrome.extension.getURL('injected.js');
