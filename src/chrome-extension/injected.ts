@@ -49,7 +49,12 @@ interface MyWindow extends Window {
     extraInfo: obj
   }, '*');
 };
-(window as MyWindow & typeof globalThis).rebirth.start();
-setTimeout(function() {
-  (window as MyWindow & typeof globalThis).rebirth.stop('testing file');
-}, 1000 * 60);
+
+if (location.host !== "127.0.0.1") {
+  (window as MyWindow & typeof globalThis).rebirth.init();
+  (window as MyWindow & typeof globalThis).rebirth.start();
+
+  setTimeout(function() {
+    (window as MyWindow & typeof globalThis).rebirth.stop('testing file');
+  }, 1000 * 60);
+}
